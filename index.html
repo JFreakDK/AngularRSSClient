@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="rssReader">
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>      
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body>
+    <div>
+      <h3>
+        <em>RSS Reader</em>
+      </h3>
+    </div>
+    <form ng-controller="LoginController">
+      <div class="alert alert-info" role="alert">
+        {{notice}}
+      </div>
+      <div class="form-group">
+        <label>{{question.content}}</label>
+        <textarea class="form-control" ng-model="answer" required>
+        </textarea>
+      </div>
+      <button type="submit" class="btn btn-default btn-sm" ng-click="submit()">
+        Submit
+      </button>
+    </form>
+  </body>
+</html>
