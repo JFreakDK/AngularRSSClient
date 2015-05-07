@@ -6,7 +6,13 @@
     $scope.submit = function () {
       $http.get(url + '/login', { params: { username: $scope.username, password: $scope.password } })
         .then(function (response) {
-        $scope.question = response.data;
+          if (response.data.success) {
+            $scope.question = 'Flot';
+          }else{
+            
+            $scope.question = 'Wrong';
+          }
+        
       }, function (response) {
           $scope.notice = response.status + " " + response.data.error;
         });
