@@ -6,14 +6,14 @@
     $routeProvider
       .when('/', {
       controller: 'LoginController',
-      templateUrl: 'views/login.html'
+      templateUrl: '/AngularRSSClient/views/login.html'
     })
       .when('/main', {
       controller: 'LoginController',
-      templateUrl: 'views/main.html'
+      templateUrl: '/AngularRSSClient/views/main.html'
     })
       .when('/404', {
-      templateUrl: 'views/404.html'
+      templateUrl: '/AngularRSSClient/views/404.html'
     })
       .otherwise({
       redirectTo: '/404'
