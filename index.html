@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="rssReader">
   <head>
+    <base href="/AngularRSSClient/">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>      
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>      
     <script type="text/javascript" src="app.js"></script>
   </head>
   <body>
@@ -11,20 +13,6 @@
         <em>RSS Reader</em>
       </h3>
     </div>
-    <form ng-controller="LoginController">
-      <div class="alert alert-info" role="alert">
-        {{notice}}
-      </div>
-      <div class="form-group">
-        <label>{{question}}</label>
-        <input type="text" class="form-control" ng-model="username" required>
-        </input>
-        <input type="password" class="form-control" ng-model="password" required>
-        </input>
-      </div>
-      <button type="submit" class="btn btn-default btn-sm" ng-click="submit()">
-        Submit
-      </button>
-    </form>
+    <div ng-view></div>
   </body>
 </html>

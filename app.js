@@ -1,18 +1,37 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
-  angular.module('rssReader', [])
-    .value('url', '/selfoss')
-    .controller('LoginController', function ($scope, $http, url) {
+  var app = angular.module('rssReader', ['ngRoute']);
+  app.value('url', '/selfoss');
+  app.config(function ($routeProvider) {
+    $routeProvider
+      .when('/', {
+      controller: 'LoginController',
+      templateUrl: 'views/login.html'
+    })
+      .when('/main', {
+      controller: 'LoginController',
+      templateUrl: 'views/main.html'
+    })
+      .when('/404', {
+      templateUrl: 'views/404.html'
+    })
+      .otherwise({
+      redirectTo: '/404'
+    });
+  });
+  app.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+  });
+  app.controller('LoginController', function ($scope, $http,  $location, url) {
     $scope.submit = function () {
       $http.get(url + '/login', { params: { username: $scope.username, password: $scope.password } })
         .then(function (response) {
-          if (response.data.success) {
-            $scope.question = 'Flot';
-          }else{
-            
-            $scope.question = 'Wrong';
-          }
-        
+        if (response.data.success) {
+          $scope.question = 'Flot';
+           $location.path('/main');
+        } else {
+          $scope.question = 'Wrong';
+        };
       }, function (response) {
           $scope.notice = response.status + " " + response.data.error;
         });
