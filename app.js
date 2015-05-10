@@ -1,6 +1,8 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
   var app = angular.module('rssReader', ['ngRoute']);
+  app.value('usersname', null);
+  app.value('password', null)
   app.value('url', '/selfoss');
   app.config(function ($routeProvider) {
     $routeProvider
@@ -19,16 +21,19 @@
       redirectTo: '/404'
     });
   });
-  app.config(function($locationProvider) {
+  app.config(function ($locationProvider) {
     $locationProvider.html5Mode(true);
   });
-  app.controller('LoginController', function ($scope, $http,  $location, url) {
+  app.controller('LoginController', function ($scope, $http, $location, url, credentials) {
     $scope.submit = function () {
       $http.get(url + '/login', { params: { username: $scope.username, password: $scope.password } })
         .then(function (response) {
         if (response.data.success) {
+          credentials.username = $scope.username;
+          credentials.password = $scope.password;
+
           $scope.question = 'Flot';
-           $location.path('/main');
+          $location.path('/main');
         } else {
           $scope.question = 'Wrong';
         };
@@ -37,4 +42,20 @@
         });
     };
   });
+  app.controller('FeedController', function ($scope, $http, url, credentials) {
+    $scope.items = {};
+    $scope.load = function () {
+      $http.get(url + '/items', { params: { type: 'unread', username: credentials.username, password: credentials.password } })
+        .then(function (response) {
+        $scope.items = response.data;
+      }, function (response) {
+          $scope.notice = response.status + " " + response.data.error;
+        });
+    };
+  });
+  app.service('credentials', function () {
+    this.username = null;
+    this.password = null;
+  });
+
 })();

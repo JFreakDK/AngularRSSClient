@@ -1,1 +1,6 @@
 <a href="http://www.ob.dk">Mojn</a>
+<div ng-controller="FeedController" ng-init="load()">
+  <div ng-repeat="item in items">
+      {{item.title}}
+  </div>
+</div>
