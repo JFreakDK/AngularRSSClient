@@ -1,6 +1,34 @@
-<a href="http://www.ob.dk">Mojn</a>
-<div ng-controller="FeedController" ng-init="load()">
-  <div ng-repeat="item in items">
-      {{item.title}}
+<div>
+  <span>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active">
+        <a href="#">Newest</a>
+      </li>
+      <li role="presentation">
+        <a href="#">Unread</a>
+      </li>
+      <li role="presentation">
+        <a href="#">Starred</a>
+      </li>
+    </ul>
+  </span>
+  <span>
+    <div ng-controller="FeedController" ng-init="load()">
+      <div class="panel-group" id="accordion">
+        <div ng-repeat="item in items">
+          <div class="panel panel-default" id="{{ 'panel' + $index }}">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-target="{{ '#collapse'+$index }}" href="{{ '#collapse' + $index }}" class="collapsed">
+          {{item.title}}
+        </a>
+              </h4>
+            </div>
+            <div id="{{ 'collapse'+$index }}" class="panel-collapse collapse">
+              <div class="panel-body" ng-bind-html="item.content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </span>
   </div>
-</div>

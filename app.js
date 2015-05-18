@@ -1,6 +1,6 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
-  var app = angular.module('rssReader', ['ngRoute']);
+  var app = angular.module('rssReader', ['ngRoute', 'ngSanitize']);
   app.value('usersname', null);
   app.value('password', null)
   app.value('url', '/selfoss');
