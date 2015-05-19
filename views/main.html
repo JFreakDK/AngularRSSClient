@@ -19,8 +19,8 @@
           <div class="panel panel-default" id="{{ 'panel' + $index }}">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-target="{{ '#collapse'+$index }}" href="{{ '#collapse' + $index }}" class="collapsed">
-          {{item.title}}
+                <a data-toggle="collapse" data-target="{{ '#collapse'+$index }}" href="{{ '#collapse' + $index }}" class="collapsed"  ng-bind-html="item.title">
+          
         </a>
               </h4>
             </div>
