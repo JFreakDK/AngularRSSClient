@@ -1,6 +1,6 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
-  var app = angular.module('rssReader', ['ngRoute', 'ngSanitize']);
+  var app = angular.module('rssReader', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
   app.value('usersname', null);
   app.value('password', null)
   app.value('url', '/selfoss');
@@ -45,7 +45,7 @@
   app.controller('FeedController', function ($scope, $http, url, credentials) {
     $scope.items = {};
     $scope.load = function () {
-      $http.get(url + '/items', { params: { type: 'unread', username: credentials.username, password: credentials.password } })
+      $http.get(url + '/items', { params: { /*type: 'unread', */ username: credentials.username, password: credentials.password } })
         .then(function (response) {
         $scope.items = response.data;
       }, function (response) {
