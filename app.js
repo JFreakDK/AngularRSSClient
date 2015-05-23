@@ -2,7 +2,7 @@
 (function () {
   var app = angular.module('rssReader', ['ngAnimate', 'ngRoute', 'ngSanitize', 'ui.bootstrap']);
   app.value('usersname', null);
-  app.value('password', null)
+  app.value('password', null);
   app.value('url', '/selfoss');
   app.config(function ($routeProvider) {
     $routeProvider
@@ -63,8 +63,8 @@
         }, function (response) {
             $scope.notice = response.status + " " + response.data.error;
           });
-      }
-    }
+      };
+    };
   });
   app.service('credentials', function () {
     this.username = null;
