@@ -1,6 +1,6 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
-  var app = angular.module('rssReader', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+  var app = angular.module('rssReader', ['ngAnimate', 'ngRoute', 'ngSanitize', 'ui.bootstrap']);
   app.value('usersname', null);
   app.value('password', null)
   app.value('url', '/selfoss');
@@ -22,7 +22,8 @@
     });
   });
   app.config(function ($locationProvider) {
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
   });
   app.controller('LoginController', function ($scope, $http, $location, url, credentials) {
     $scope.submit = function () {
@@ -55,10 +56,13 @@
     $scope.open = function (index) {
       var item = $scope.items[index];
       item.isCollapsed = !item.isCollapsed;
-      $log.info('item.unread: ' + item.unread);
       if (item.unread === '1') {
-        item.unread = '0';
-        $log.info('item.unread after: ' + item.unread);
+        $http.post(url + '/mark/' + item.id, { params: { username: credentials.username, password: credentials.password } })
+          .then(function (response) {
+          item.unread = '0';
+        }, function (response) {
+            $scope.notice = response.status + " " + response.data.error;
+          });
       }
     }
   });
