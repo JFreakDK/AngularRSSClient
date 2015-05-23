@@ -9,3 +9,6 @@
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+.unread {
+    font-weight: bold
+}

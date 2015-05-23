@@ -42,7 +42,7 @@
         });
     };
   });
-  app.controller('FeedController', function ($scope, $http, url, credentials) {
+  app.controller('FeedController', function ($scope, $http, $log, url, credentials) {
     $scope.items = {};
     $scope.load = function () {
       $http.get(url + '/items', { params: { /*type: 'unread', */ username: credentials.username, password: credentials.password } })
@@ -52,6 +52,15 @@
           $scope.notice = response.status + " " + response.data.error;
         });
     };
+    $scope.open = function (index) {
+      var item = $scope.items[index];
+      item.isCollapsed = !item.isCollapsed;
+      $log.info('item.unread: ' + item.unread);
+      if (item.unread === '1') {
+        item.unread = '0';
+        $log.info('item.unread after: ' + item.unread);
+      }
+    }
   });
   app.service('credentials', function () {
     this.username = null;

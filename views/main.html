@@ -19,10 +19,10 @@
           <div class="panel panel-default" id="{{ 'panel' + $index }}">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a ng-click="item.isCollapsed = !item.isCollapsed" href="#" ng-bind-html="item.title"></a> - <span ng-bind-html="item.sourcetitle"></span>
+                <a ng-click="open($index)" href="#" ng-bind-html="item.title" ng-class="{ 'unread' : (item.unread === '1') }"></a> - <span ng-bind-html="item.sourcetitle"></span>
               </h4>
             </div>
-            <div  collapse="!item.isCollapsed" id="{{ 'collapse'+$index }}">
+            <div collapse="!item.isCollapsed">
               <div class="panel-body" ng-bind-html="item.content"></div>
             </div>
           </div>
