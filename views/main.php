@@ -1,25 +1,24 @@
-<div>
+<div ng-controller="FeedController" ng-init="load()">
   <span>
     <ul class="nav nav-pills nav-stacked">
-      <li role="presentation" class="active">
-        <a href="#">Newest</a>
+      <li role="presentation" ng-class="{ 'active' : (fType === '') }">
+        <a href="" ng-click="setType('')" >Newest</a>
       </li>
-      <li role="presentation">
-        <a href="#">Unread</a>
+      <li role="presentation" ng-class="{ 'active' : (fType === 'unread') }">
+        <a href="" ng-click="setType('unread')">Unread</a>
       </li>
-      <li role="presentation">
-        <a href="#">Starred</a>
+      <li role="presentation" ng-class="{ 'active' : (fType === 'starred') }">
+        <a href="" ng-click="setType('starred')">Starred</a>
       </li>
     </ul>
   </span>
   <span>
-    <div ng-controller="FeedController" ng-init="load()">
       <div class="panel-group" id="accordion">
         <div ng-repeat="item in items">
           <div class="panel panel-default" id="{{ 'panel' + $index }}">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a ng-click="open($index)" href="#" ng-bind-html="item.title" ng-class="{ 'unread' : (item.unread === '1') }"></a> - <span ng-bind-html="item.sourcetitle"></span>
+                <a href="" ng-click="open($index)" ng-bind-html="item.title" ng-class="{ 'unread' : (item.unread === '1') }"></a> - <span ng-bind-html="item.sourcetitle"></span>
               </h4>
             </div>
             <div collapse="!item.isCollapsed">
@@ -28,6 +27,5 @@
             </div>
           </div>
         </div>
-      </div>
   </span>
-  </div>
+</div>

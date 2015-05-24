@@ -1,18 +1,17 @@
 /// <reference path="typings/angularjs/angular.d.ts"/>
 (function () {
   var app = angular.module('rssReader', ['ngAnimate', 'ngRoute', 'ngSanitize', 'ui.bootstrap']);
-  app.value('usersname', null);
-  app.value('password', null);
+  app.value('feedType', 'unread');
   app.value('url', '/selfoss');
   app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
       controller: 'LoginController',
-      templateUrl: '/AngularRSSClient/views/login.html'
+      templateUrl: '/AngularRSSClient/views/login.php'
     })
       .when('/main', {
-      controller: 'LoginController',
-      templateUrl: '/AngularRSSClient/views/main.html'
+      controller: 'FeedController',
+      templateUrl: '/AngularRSSClient/views/main.php'
     })
       .when('/404', {
       templateUrl: '/AngularRSSClient/views/404.html'
@@ -32,8 +31,6 @@
         if (response.data.success) {
           credentials.username = $scope.username;
           credentials.password = $scope.password;
-
-          $scope.question = 'Flot';
           $location.path('/main');
         } else {
           $scope.question = 'Wrong';
@@ -43,10 +40,15 @@
         });
     };
   });
-  app.controller('FeedController', function ($scope, $http, $log, url, credentials) {
+  app.controller('FeedController', function ($scope, $http, $log, url, feedType, credentials) {
     $scope.items = {};
     $scope.load = function () {
-      $http.get(url + '/items', { params: { /*type: 'unread', */ username: credentials.username, password: credentials.password } })
+      var parameters = { params: { username: credentials.username, password: credentials.password } };
+      if (feedType !== '') {
+        parameters.params.type = feedType;
+      }
+      $scope.fType = feedType;
+      $http.get(url + '/items', parameters)
         .then(function (response) {
         $scope.items = response.data;
       }, function (response) {
@@ -64,6 +66,10 @@
             $scope.notice = response.status + " " + response.data.error;
           });
       };
+    };
+    $scope.setType = function (selectedType) {
+      feedType = selectedType;
+      $scope.load();
     };
   });
   app.service('credentials', function () {
