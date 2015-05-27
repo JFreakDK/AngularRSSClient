@@ -21,7 +21,6 @@
     });
   });
   app.config(function ($locationProvider) {
-    //$locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
   });
   app.controller('LoginController', function ($scope, $http, $location, url, credentials) {

@@ -9,6 +9,16 @@
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+/*
+.panel-footer a::before{
+    font-family:'Glyphicons Halflings';
+    content: "\e114 ";
+}
+*/
 .unread {
-    font-weight: bold
+    font-weight: bolder
+}
+
+.read {
+    color: gray
 }

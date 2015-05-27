@@ -1,7 +1,6 @@
     <form ng-controller="LoginController">
       <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{notice}}
+      {{notice}}    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="form-group">
         <label>{{question}}</label>

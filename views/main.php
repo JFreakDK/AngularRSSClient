@@ -18,12 +18,12 @@
           <div class="panel panel-default" id="{{ 'panel' + $index }}">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a href="" ng-click="open($index)" ng-bind-html="item.title" ng-class="{ 'unread' : (item.unread === '1') }"></a> - <span ng-bind-html="item.sourcetitle"></span>
+                <a href="" ng-click="open($index)" ng-bind-html="item.title" ng-class="{ 'unread' : (item.unread === '1'), 'read' :  (item.unread !== '1'), 'collapsed' : !item.isCollapsed }"></a> - <span ng-bind-html="item.sourcetitle"></span>
               </h4>
             </div>
             <div collapse="!item.isCollapsed">
               <div class="panel-body" ng-bind-html="item.content"></div>
-              <div class="panel-footer" ><a ng-href="{{item.link}}">Open link</a></div>
+              <div class="panel-footer" ><span class="glyphicon glyphicon-new-window"></span> <a ng-href="{{item.link}}">Open link</a></div>
             </div>
           </div>
         </div>
